@@ -1,7 +1,8 @@
-//$ Copyright 2015-19, Code Respawn Technologies Pvt Ltd - All Rights Reserved $//
+//$ Copyright 2015-20, Code Respawn Technologies Pvt Ltd - All Rights Reserved $//
 
 #pragma once
 #include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
 #include "PrefabRandomizerActor.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FPrefabRandomizerCompleteBindableEvent);
@@ -35,6 +36,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable, Category = "Prefabricator")
 	FPrefabRandomizerCompleteBindableEvent OnRandomizationComplete;
+
+	UPROPERTY(EditAnywhere, Category = "Prefabricator")
+	bool bFastSyncBuild = false;
 
 private:
 	TSharedPtr<class FPrefabBuildSystem> BuildSystem;

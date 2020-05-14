@@ -1,8 +1,9 @@
-//$ Copyright 2015-19, Code Respawn Technologies Pvt Ltd - All Rights Reserved $//
+//$ Copyright 2015-20, Code Respawn Technologies Pvt Ltd - All Rights Reserved $//
 
 #include "Asset/PrefabricatorAssetFactory.h"
 
 #include "Asset/PrefabricatorAsset.h"
+#include "Utils/PrefabEditorTools.h"
 
 ////////////////////////////////// UPrefabricatorAssetFactory ///////////////////////////////////
 
@@ -19,6 +20,7 @@ bool UPrefabricatorAssetFactory::CanCreateNew() const {
 UObject* UPrefabricatorAssetFactory::FactoryCreateNew(UClass* Class, UObject* InParent, FName Name, EObjectFlags Flags, UObject* Context, FFeedbackContext* Warn) {
 	UPrefabricatorAsset* NewAsset = NewObject<UPrefabricatorAsset>(InParent, Class, Name, Flags | RF_Transactional);
 	NewAsset->Version = (uint32)EPrefabricatorAssetVersion::LatestVersion;
+	NewAsset->ThumbnailInfo = FPrefabEditorTools::CreateDefaultThumbInfo(NewAsset);
 	return NewAsset;
 }
 
@@ -40,3 +42,4 @@ UObject* UPrefabricatorAssetCollectionFactory::FactoryCreateNew(UClass* Class, U
 	UPrefabricatorAssetCollection* NewAsset = NewObject<UPrefabricatorAssetCollection>(InParent, Class, Name, Flags | RF_Transactional);
 	return NewAsset;
 }
+
